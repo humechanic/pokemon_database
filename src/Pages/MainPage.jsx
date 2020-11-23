@@ -1,12 +1,17 @@
 import React from "react";
 import classes from "./../sass/main.module.scss";
-import { requestAllPokemons } from "./../model/requestConstructor";
+import { connect, useDispatch } from "react-redux";
+import { requestAllPokemonsThunk } from "../redux/thunks";
+import PageCaption from "../Components/PageCaption/PageCaption";
+import Navbar from "../Components/Navbar/Navbar";
 
-const MainPage = () => {
-    // const checkingDataStructureIget = requestAllPokemons();
+const MainPage = ({ availablePokemons, count }) => {
     return (
         <>
-            <div className={classes.contentWrapper}>privet</div>
+            <div className={classes.content}>
+                <PageCaption caption={"Welcome to the largest pokemons' database"} />
+                <Navbar />
+            </div>
         </>
     );
 };
