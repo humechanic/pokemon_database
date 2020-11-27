@@ -1,7 +1,5 @@
 import React from "react";
 import classes from "./../sass/main.module.scss";
-import { connect, useDispatch } from "react-redux";
-import { requestAllPokemonsThunk } from "../redux/thunks";
 import PageCaption from "../Components/PageCaption/PageCaption";
 import Navbar from "../Components/Navbar/Navbar";
 

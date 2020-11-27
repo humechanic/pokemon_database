@@ -1,0 +1,22 @@
+.pokemonItemWrapper {
+ display: flex;
+ img {
+    height: 100px;
+ }
+}
+.pokemonItemName {
+    font-weight: 500;
+}
+.pokemonItemElement {
+    font-weight: 300;
+}
+.pokemonDescription {
+    margin-left: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    div {
+        margin-bottom: 4px;
+        border-bottom: 1px solid lightgrey;
+    }
+}
