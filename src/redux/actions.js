@@ -1,19 +1,18 @@
 import {
-    GET_ALL_POKEMONS,
+    SET_ALL_POKEMONS,
     GET_POKEMON_ABILITIES,
     GET_POKEMON_CHARACTERISTICS,
     GET_POKEMON_STATS,
     GET_POKEMON_TYPES,
     IS_DATA_LOADING,
+    SET_CURRENT_PAGE,
+    SET_POKEMON_DATA,
 } from "./actionTypes";
 
-export const getAllPokemons = (count, results) => {
+export const setAllPokemons = (data) => {
     return {
-        type: GET_ALL_POKEMONS,
-        payload: {
-            count,
-            results,
-        },
+        type: SET_ALL_POKEMONS,
+        payload: data,
     };
 };
 
@@ -51,5 +50,17 @@ export const isDataLoading = (bool) => {
     return {
         type: IS_DATA_LOADING,
         payload: bool,
+    };
+};
+export const setCurrentPage = (currentPage) => {
+    return {
+        type: SET_CURRENT_PAGE,
+        payload: currentPage,
+    };
+};
+export const setPokemonData = (data) => {
+    return {
+        type: SET_POKEMON_DATA,
+        payload: data,
     };
 };

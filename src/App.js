@@ -1,20 +1,11 @@
-import logo from "./logo.svg";
 import "./App.css";
 import MainPage from "./Pages/MainPage";
-import { connect, useDispatch, useSelector } from "react-redux";
-import { requestAllPokemonsThunk } from "./redux/thunks";
-import { useEffect, useState } from "react";
-import { allPokemonAmountSelector, allPokemonDataSelector } from "./redux/selectors";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AboutUsPage from "./Pages/AboutUs";
 import PokemonCollectionPage from "./Pages/PokemonCollectionPage";
+import WithPokemonData from "./HOCs/withPokemonData";
 
 const App = () => {
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(requestAllPokemonsThunk("https://pokeapi.co/api/v2/pokemon"));
-    }, []);
-
     return (
         <Router>
             <div className="root">
@@ -23,7 +14,7 @@ const App = () => {
                         <MainPage />
                     </Route>
                     <Route exact path="/collection">
-                        <PokemonCollectionPage />
+                        {WithPokemonData(PokemonCollectionPage)}
                     </Route>
                     <Route exact path="/about">
                         <AboutUsPage />
@@ -34,10 +25,4 @@ const App = () => {
     );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-    initialRequest() {
-        dispatch(requestAllPokemonsThunk("https://pokeapi.co/api/v2/pokemon"));
-    },
-});
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;
