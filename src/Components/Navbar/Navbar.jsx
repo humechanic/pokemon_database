@@ -14,7 +14,7 @@ const Navbar = () => {
             <ul className={classes.navbar}>
                 {NAVIGATION_ELEMENTS.map((item) => {
                     return (
-                        <li className={classes.navbarLink}>
+                        <li key={item.name} className={classes.navbarLink}>
                             <Link to={item.path}>{item.name}</Link>
                         </li>
                     );

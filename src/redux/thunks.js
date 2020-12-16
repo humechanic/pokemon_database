@@ -1,21 +1,24 @@
-import { isDataLoading, setPokemonData } from "./actions";
-import axios from "axios";
+import { isDataLoading, setPokemonData, dataForPagination, setPokemonBunch } from "./actions";
+import { requestMethod } from "../model/requestConstructor";
+import { batch } from "react-redux";
 
-export const requestPokemonDataThunk = (url = null, callbackFn = null) => async (dispatch, getState) => {
+export const requestPokemonDataThunk = (url = null) => (dispatch, getState) => {
+    if (!url) return;
     dispatch(isDataLoading(true));
     try {
-        const responseData = await axios
-            .get(url)
+        requestMethod(url)
             .then((response) => {
-                // config // data // headers // request // status // statusText
                 const { data } = response;
+                batch(() => {
+                    dispatch(setPokemonBunch(data));
+                    dispatch(dataForPagination(data.previous, data.next));
+                });
                 return data;
             })
-            .catch((err) => {
-                dispatch(isDataLoading(false));
-                console.log(err);
+            .then((response) => {
+                const { results } = response;
+                dispatch(fetchPokemons(results));
             });
-        dispatch(callbackFn(responseData));
     } catch (err) {
         console.log(err);
         dispatch(isDataLoading(false));
@@ -29,21 +32,26 @@ export const fetchPokemons = (pokemonsOnCurrentPage = []) => (dispatch, getState
     let pokemonResponse = [];
 
     pokemonsOnCurrentPage.forEach((it) => {
-        pokemonResponse.push(axios.get(it.url));
+        pokemonResponse.push(requestMethod(it.url));
     });
-    Promise.all(pokemonResponse)
+
+    Promise.allSettled(pokemonResponse)
         .then((data) => {
-            let dataBatch = []
+            let detailedPokemonData = [];
             data.forEach((it) => {
-                dataBatch.push(it.data)
-            })
-            dispatch(setPokemonData(dataBatch));
-        }
-        )
+                if (it.status === "fulfilled") {
+                    detailedPokemonData.push(it.value.data);
+                } else {
+                    detailedPokemonData.push(it.reason);
+                }
+            });
+
+            dispatch(setPokemonData(detailedPokemonData));
+        })
         .catch((err) => {
             dispatch(isDataLoading(false));
             console.log(err);
-        })
+        });
     dispatch(isDataLoading(false));
     return;
-}
+};

@@ -21,12 +21,12 @@ const initialState = {
 export const pokemonCollectionReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_ALL_POKEMONS:
-            const { count, results } = action.payload;
-            return { ...state, totalData: { count, results } };
+            const { count, results: responseResults } = action.payload;
+            return { ...state, totalData: { count, results: [...state.totalData.results, ...responseResults] } };
         case GET_POKEMON_ABILITIES:
             return action.payload;
         case SET_POKEMON_DATA:
-            return { ...state, pokemons: [ ...action.payload ] };
+            return { ...state, pokemons: [...state.pokemons, ...action.payload] };
         case GET_POKEMON_CHARACTERISTICS:
             return action.payload;
         case GET_POKEMON_GENDERS:

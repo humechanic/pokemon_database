@@ -1,8 +1,9 @@
 .pokemonItemWrapper {
- display: flex;
- img {
-    height: 100px;
- }
+    display: flex;
+    justify-content: flex-start;
+    img {
+        height: 100px;
+    }
 }
 .pokemonItemName {
     font-weight: 500;

@@ -3,7 +3,6 @@ import MainPage from "./Pages/MainPage";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AboutUsPage from "./Pages/AboutUs";
 import PokemonCollectionPage from "./Pages/PokemonCollectionPage";
-import WithPokemonData from "./HOCs/withPokemonData";
 
 const App = () => {
     return (
@@ -14,7 +13,7 @@ const App = () => {
                         <MainPage />
                     </Route>
                     <Route exact path="/collection">
-                        {WithPokemonData(PokemonCollectionPage)}
+                        <PokemonCollectionPage />
                     </Route>
                     <Route exact path="/about">
                         <AboutUsPage />

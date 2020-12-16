@@ -20,3 +20,9 @@ export const getCurrentPageSelector = ({ appReducer }) => {
 export const pokemonPageData = ({ pokemonData }) => {
     return pokemonData.pokemons;
 };
+export const nextPageUrlSelector = ({ appReducer }) => {
+    return appReducer.next;
+};
+export const isEverythingLoadedSelector = ({ appReducer }) => {
+    return appReducer.isEverythingLoaded;
+};
