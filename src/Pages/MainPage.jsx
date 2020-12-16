@@ -7,8 +7,8 @@ const MainPage = ({ availablePokemons, count }) => {
     return (
         <>
             <div className={classes.content}>
-                <PageCaption caption={"Welcome to the largest pokemons' database"} />
                 <Navbar />
+                <PageCaption caption={"Welcome to the largest pokemons' database"} />
             </div>
         </>
     );

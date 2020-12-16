@@ -7,9 +7,11 @@ import {
     IS_DATA_LOADING,
     SET_CURRENT_PAGE,
     SET_POKEMON_DATA,
+    SET_DATA_FOR_PAGINATION,
+    IS_EVERYTHING_LOADED,
 } from "./actionTypes";
 
-export const setAllPokemons = (data) => {
+export const setPokemonBunch = (data) => {
     return {
         type: SET_ALL_POKEMONS,
         payload: data,
@@ -52,6 +54,12 @@ export const isDataLoading = (bool) => {
         payload: bool,
     };
 };
+export const isEverythingLoaded = (bool) => {
+    return {
+        type: IS_EVERYTHING_LOADED,
+        payload: bool,
+    };
+};
 export const setCurrentPage = (currentPage) => {
     return {
         type: SET_CURRENT_PAGE,
@@ -62,5 +70,11 @@ export const setPokemonData = (data) => {
     return {
         type: SET_POKEMON_DATA,
         payload: data,
+    };
+};
+export const dataForPagination = (prev, next) => {
+    return {
+        type: SET_DATA_FOR_PAGINATION,
+        payload: { prev, next },
     };
 };

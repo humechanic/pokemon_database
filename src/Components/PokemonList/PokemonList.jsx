@@ -1,20 +1,33 @@
 import classes from "./pokemonList.module.scss";
 import React from "react";
-import Pagination from "../Pagination/Pagination";
 import PokemonItem from "./PokemonItem";
-import WithPokemonList from "../../HOCs/withPokemonList";
+import WithPokemonData from "../../HOCs/withPokemonData";
+import { compose } from "redux";
+import WithInfiniteScroll from "../../HOCs/withInfiniteScroll";
+import { useSelector } from "react-redux";
+import { isDataLoadingSelector, pokemonPageData } from "../../redux/selectors";
+import Spinner from "../Spinner/Spinner";
 
-const PokemonList = ({ pokemonData }) => {
+let PokemonList = () => {
+    const pokemonData = useSelector((state) => pokemonPageData(state));
+    const isDataLoading = useSelector((state) => isDataLoadingSelector(state));
     return (
         <>
-            <div className={classes.pokemonList}>
-                {pokemonData?.map((it) => {
-                    return <PokemonItem data={it} key={it.name} />;
-                })}
-            </div>
-            <Pagination />
+            {isDataLoading ? (
+                <Spinner />
+            ) : (
+                <div className={classes.pokemonList}>
+                    <div className={classes.wrapperPokemonList}>
+                        {pokemonData.map((it) => {
+                            return <PokemonItem data={it} key={it.id} />;
+                        })}
+                    </div>
+                </div>
+            )}
         </>
     );
 };
+
+PokemonList = compose(WithPokemonData, WithInfiniteScroll)(PokemonList);
 
 export default PokemonList;

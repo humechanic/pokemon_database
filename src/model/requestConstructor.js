@@ -1,10 +1,7 @@
 import * as axios from "axios";
 
-export const requestAllPokemons = async () => {
-    const {
-        data: { results, count },
-    } = await axios.get("https://pokeapi.co/api/v2/pokemon");
-    return { count, results };
+export const requestMethod = async (url, ...params) => {
+    return await axios.get(url, ...params);
 };
 
 export const requestPokemonsAbilities = () => {};

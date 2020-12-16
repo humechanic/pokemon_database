@@ -4,7 +4,10 @@ import classes from "./pageCaption.module.scss";
 const PageCaption = ({ caption }) => {
     return (
         <>
-            <div className={classes.pageCaption}>{caption}</div>
+            <div className={classes.pageCaption}>
+                {/* {caption} */}
+                <img src="/logo.png" alt="POKEMON" />
+            </div>
         </>
     );
 };
