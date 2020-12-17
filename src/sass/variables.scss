@@ -1,0 +1,18 @@
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+    @return $map;
+}
+
+$currentTheme: (
+    "primary": () "secondary": (),
+);
+
+$Green: #9caa58;
+$Yellow: #cfcd33;
+$Beige: #f9c37a;
+$Black: #1d1d1d;
+$White: #f7f7f7;
+$Grey: #e4e4e4;
+$DarkViolet: #00384a;

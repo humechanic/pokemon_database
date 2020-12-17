@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import classes from "./navbar.module.scss";
 
@@ -9,8 +9,23 @@ const NAVIGATION_ELEMENTS = [
 ];
 
 const Navbar = () => {
+    const navBarElement = useRef(null);
+    useEffect(() => {
+        const shouldBeSticky = navBarElement.current.offsetTop;
+        if (!navBarElement.current) return;
+        const scrollCallBack = window.addEventListener("scroll", () => {
+            if (window.pageYOffset > shouldBeSticky) {
+                navBarElement.current.classList.add(classes.fixed);
+            } else {
+                navBarElement.current.classList.remove(classes.fixed);
+            }
+        });
+        return () => {
+            window.removeEventListener("scroll", scrollCallBack);
+        };
+    }, []);
     return (
-        <div className={classes.navbarContainer}>
+        <div ref={navBarElement} className={classes.navbarContainer}>
             <ul className={classes.navbar}>
                 {NAVIGATION_ELEMENTS.map((item) => {
                     return (
