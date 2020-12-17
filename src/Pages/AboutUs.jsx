@@ -6,7 +6,6 @@ const AboutUsPage = () => {
     return (
         <>
             <div className={classes.content}>
-                <Navbar />
                 The Pokémon anime series was largely credited for allowing anime to become more popular and familiar around the world,
                 especially in the United States, where the two highest-grossing anime films are both Pokémon films.[5] It was also
                 considered to be one of the first anime series on television to reach this level of mainstream success with Western

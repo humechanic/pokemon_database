@@ -7,7 +7,6 @@ const PokemonCollectionPage = () => {
     return (
         <>
             <div className={classes.content}>
-                <Navbar />
                 <PokemonList />
             </div>
         </>

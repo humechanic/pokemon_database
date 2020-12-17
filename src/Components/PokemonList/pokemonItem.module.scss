@@ -1,6 +1,8 @@
 .pokemonItemWrapper {
     display: flex;
     justify-content: flex-start;
+    flex-shrink: 2;
+    width: 50%;
     img {
         height: 100px;
     }
