@@ -5,33 +5,32 @@ import { isEverythingLoaded } from "../redux/actions";
 import { requestPokemonDataThunk } from "../redux/thunks";
 
 let debounce;
+let started = false;
 
 const WithInfiniteScroll = (Component) => {
-    // const Component = React.lazy(() => import(`./${wrappedComponent}`));
     class WithInfiniteScrollHOC extends React.Component {
-        constructor(props) {
-            super(props);
-            this.state = {
-                isFetching: false,
-            };
-        }
+        //TO DO:
+        //optimize scroll to avoid scroll lagging
+        //while scrolling too fast
 
-        handleScroll = () => {
+        handleScroll = (event) => {
+            const { target } = event;
+            if (!started) {
+                started = true;
+                return;
+            }
+            started = false;
+
             clearTimeout(debounce);
             const { count, pokemons, nextPageUrl, dispatch, isLoaded } = this.props;
-            const { isFetching } = this.state;
-            if (isFetching) return;
 
             debounce = setTimeout(() => {
-                const scrollTop = document.documentElement?.scrollTop || document.body.scrollTop;
-                const scrollHeight = document.documentElement?.scrollHeight || document.body.scrollHeight;
+                const scrollTop = target.scrollTop || document.body.scrollTop;
+                const scrollHeight = target.scrollHeight || document.body.scrollHeight;
 
                 const closeToTheBottom = scrollTop + window.innerHeight >= scrollHeight - 50;
 
                 if (pokemons.length >= count) {
-                    this.setState({
-                        isFetching: false,
-                    });
                     if (closeToTheBottom && !isLoaded) {
                         dispatch(isEverythingLoaded(true));
                     }
@@ -39,36 +38,15 @@ const WithInfiniteScroll = (Component) => {
                 }
 
                 if (closeToTheBottom && nextPageUrl) {
-                    this.setState({
-                        isFetching: true,
-                    });
+                    dispatch(requestPokemonDataThunk(nextPageUrl));
                 }
             }, 50);
         };
 
-        componentDidUpdate() {
-            const { isFetching } = this.state;
-            const { dispatch, nextPageUrl } = this.props;
-            if (isFetching && nextPageUrl) {
-                this.setState({
-                    isFetching: false,
-                });
-                dispatch(requestPokemonDataThunk(nextPageUrl));
-            }
-        }
-
-        componentDidMount() {
-            window.addEventListener("scroll", this.handleScroll);
-        }
-
-        componentWillUnmount() {
-            window.removeEventListener("scroll", this.handleScroll);
-        }
-
         render() {
             return (
                 <>
-                    <Component />
+                    <Component key={1} onScrollHandler={this.handleScroll} />
                     <Notification />
                 </>
             );

@@ -6,13 +6,23 @@
 }
 
 $currentTheme: (
-    "primary": () "secondary": (),
+    primary: (
+        header: #e4e4e4,
+        background: #f7f7f7,
+        text: #1d1d1d,
+    ),
+    secondary: (
+        box-shadow: #5353539c,
+        text: #c0bcbc,
+        itemBackground: #e9e9e9,
+    ),
 );
 
 $Green: #9caa58;
 $Yellow: #cfcd33;
 $Beige: #f9c37a;
 $Black: #1d1d1d;
+$BlackTransparent30: #5353539c;
 $White: #f7f7f7;
 $Grey: #e4e4e4;
 $DarkViolet: #00384a;

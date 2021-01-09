@@ -1,16 +1,32 @@
+@import "./../../sass/variables.scss";
+
 .pokemonItemWrapper {
     display: flex;
-    justify-content: flex-start;
-    flex-shrink: 2;
-    width: 50%;
+    width: 400px;
+    flex-direction: column;
+    border-radius: 5px;
+    margin: 5px 0 15px 10px;
+    padding: 5px;
+    transition: 0.1s ease-in;
+    transform: scale(1);
     img {
-        height: 100px;
+        height: 200px;
+    }
+    &:hover {
+        transform: scaleX(1.02) scaleY(1.015);
+        box-shadow: 0 2px 5px map-deep-get($currentTheme, "secondary", "box-shadow");
     }
 }
+.pokemonAvatarContainer {
+    display: flex;
+    justify-content: center;
+}
 .pokemonItemName {
+    font-size: 30px;
     font-weight: 500;
 }
 .pokemonItemElement {
+    font-size: 20px;
     font-weight: 300;
 }
 .pokemonDescription {
@@ -20,6 +36,12 @@
     flex-direction: column;
     div {
         margin-bottom: 4px;
-        border-bottom: 1px solid lightgrey;
     }
+}
+
+.pokemonAbilities {
+    padding: 0 5px;
+    margin-left: 5px;
+    border-radius: 5px;
+    background-color: map-deep-get($currentTheme, "secondary", "itemBackground");
 }
