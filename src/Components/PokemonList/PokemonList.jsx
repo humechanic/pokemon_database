@@ -1,29 +1,42 @@
 import classes from "./pokemonList.module.scss";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import PokemonItem from "./PokemonItem";
 import WithPokemonData from "../../HOCs/withPokemonData";
 import { compose } from "redux";
 import WithInfiniteScroll from "../../HOCs/withInfiniteScroll";
 import { useSelector } from "react-redux";
-import { isDataLoadingSelector, pokemonPageData } from "../../redux/selectors";
+import { pokemonPageData } from "../../redux/selectors";
 import Spinner from "../Spinner/Spinner";
+import { Link } from "react-router-dom";
 
-let PokemonList = () => {
+let PokemonList = ({ onScrollHandler }) => {
     const pokemonData = useSelector((state) => pokemonPageData(state));
-    const isDataLoading = useSelector((state) => isDataLoadingSelector(state));
+    const refPokemonList = useRef(null);
+
+    useEffect(() => {
+        const refPokemonListElem = refPokemonList.current;
+        if (!refPokemonListElem) {
+            return;
+        }
+        refPokemonListElem.addEventListener("scroll", onScrollHandler);
+        return () => refPokemonListElem.removeEventListener("scroll", onScrollHandler);
+    });
     return (
         <>
-            {isDataLoading ? (
-                <Spinner />
-            ) : (
-                <div className={classes.pokemonList}>
-                    <div className={classes.wrapperPokemonList}>
-                        {pokemonData.map((it) => {
-                            return <PokemonItem data={it} key={it.id} />;
-                        })}
-                    </div>
+            <Spinner />
+            <div ref={refPokemonList} className={classes.pokemonList}>
+                <div className={classes.wrapperPokemonItems}>
+                    {pokemonData.map((it) => {
+                        return (
+                            <>
+                                <Link key={it.id} to={`/collection/${it.id}`}>
+                                    <PokemonItem data={it} />
+                                </Link>
+                            </>
+                        );
+                    })}
                 </div>
-            )}
+            </div>
         </>
     );
 };

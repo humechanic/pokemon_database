@@ -1,0 +1,86 @@
+@import "./../../sass/variables.scss";
+
+.pokemonDetailsContainer {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    padding: 5px;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    margin-top: -300px;
+}
+.pokemonAvatarContainer {
+    display: flex;
+    justify-content: center;
+}
+.pokemonDetailsHeader {
+    display: flex;
+    flex-direction: row;
+    margin-left: 100px;
+}
+.pokemonName {
+    color: map-deep-get($currentTheme, "primary", "text");
+    font-size: 40px;
+    font-weight: 400;
+    text-transform: capitalize;
+}
+.pokemonNum {
+    margin-left: 5px;
+    line-height: 2;
+    font-size: 30px;
+    color: map-deep-get($currentTheme, "secondary", "text");
+}
+
+.pokemonGeneralInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0 5px;
+    margin-left: 5px;
+    border-radius: 5px;
+    img {
+        height: 450px;
+    }
+}
+
+.pokemonStats {
+    background-color: map-deep-get($currentTheme, "secondary", "itemBackground");
+    display: flex;
+    width: 300px;
+    flex-direction: column;
+    border-radius: 5px;
+}
+
+.pokemonStatsText {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    vertical-align: middle;
+    color: map-deep-get($currentTheme, "primary", "text");
+    padding: 5px 5px 10px 5px;
+    font-size: 20px;
+}
+
+.pokemonStatsAbilities {
+    color: map-deep-get($currentTheme, "primary", "text");
+    padding: 5px 5px 10px 5px;
+    font-size: 20px;
+    padding: 5px 5px;
+    margin-left: 5px;
+    border-radius: 5px;
+    background-color: map-deep-get($currentTheme, "primary", "background");
+}
+.pokemonSpecifiedStats {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    vertical-align: middle;
+    background-color: map-deep-get($currentTheme, "primary", "background");
+    margin: 5px;
+    border-radius: 5px;
+    padding: 0px 5px 3px 5px;
+    font-size: 17px;
+    text-transform: capitalize;
+}

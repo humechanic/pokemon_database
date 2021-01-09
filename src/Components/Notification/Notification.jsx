@@ -7,7 +7,7 @@ import { isEverythingLoaded } from "../../redux/actions";
 
 let debounce;
 
-const Notification = () => {
+const Notification = ({ text = "Something went wrong" }) => {
     const dispatch = useDispatch();
     const isLoaded = useSelector((state) => isEverythingLoadedSelector(state));
 
@@ -19,7 +19,7 @@ const Notification = () => {
         return debounce;
     });
 
-    return isLoaded && <div className={clsx(classes.notification)}>No more pokemons in database</div>;
+    return isLoaded && <div className={clsx(classes.notification)}>{text}</div>;
 };
 
 export default Notification;
