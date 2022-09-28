@@ -1,0 +1,7 @@
+@mixin textLineWidth {
+    @each $width in $textLineWidths {
+        .textLine-#{$width} {
+            width: #{$width + "px"};
+        }
+    }
+}
